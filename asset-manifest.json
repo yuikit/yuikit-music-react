@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/yuikit-music-react/static/css/main.df94a1b8.chunk.css",
+    "main.js": "/yuikit-music-react/static/js/main.7cbf4c6c.chunk.js",
+    "main.js.map": "/yuikit-music-react/static/js/main.7cbf4c6c.chunk.js.map",
+    "runtime-main.js": "/yuikit-music-react/static/js/runtime-main.b7b70165.js",
+    "runtime-main.js.map": "/yuikit-music-react/static/js/runtime-main.b7b70165.js.map",
+    "static/css/2.98578abe.chunk.css": "/yuikit-music-react/static/css/2.98578abe.chunk.css",
+    "static/js/2.9448b8cc.chunk.js": "/yuikit-music-react/static/js/2.9448b8cc.chunk.js",
+    "static/js/2.9448b8cc.chunk.js.map": "/yuikit-music-react/static/js/2.9448b8cc.chunk.js.map",
+    "index.html": "/yuikit-music-react/index.html",
+    "static/css/2.98578abe.chunk.css.map": "/yuikit-music-react/static/css/2.98578abe.chunk.css.map",
+    "static/css/main.df94a1b8.chunk.css.map": "/yuikit-music-react/static/css/main.df94a1b8.chunk.css.map",
+    "static/js/2.9448b8cc.chunk.js.LICENSE.txt": "/yuikit-music-react/static/js/2.9448b8cc.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.b7b70165.js",
+    "static/css/2.98578abe.chunk.css",
+    "static/js/2.9448b8cc.chunk.js",
+    "static/css/main.df94a1b8.chunk.css",
+    "static/js/main.7cbf4c6c.chunk.js"
+  ]
+}
