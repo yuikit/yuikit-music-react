@@ -1,0 +1,261 @@
+.lyrics_box {
+  width: 100%;
+  height: calc(100% - 72px);
+  position: fixed;
+  left: 0;
+  top: 100vh;
+  background: #000 url('http://ww1.sinaimg.cn/large/0081WBrZgy1gshpjwtgwgj60zp0ovdme02.jpg') no-repeat;
+  background-size: cover;
+  background-position: center 40%;
+  overflow: hidden;
+  transition: top .3s;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  .bg_box {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .5);
+    backdrop-filter: saturate(150%) blur(20px);
+    position: sticky;
+    left: 0;
+    top: 0;
+  }
+
+  .container {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+
+    .first_screen {
+      width: 100%;
+      height: 100%;
+      display: flex;
+
+      .left,
+      .right {
+        flex: 1;
+        height: 100%;
+      }
+
+      .left {
+        .album_container {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+          transition: margin-top .3s;
+
+          .album_box {
+            width: 500px;
+            height: 500px;
+            margin-right: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+            position: relative;
+            border: 3px solid #ad986d;
+
+            img {
+              height: 100%;
+              display: block;
+              position: absolute;
+              left: 0;
+              top: 0;
+              animation: spin 46s infinite linear;
+              -webkit-animation: spin 40s infinite linear;
+              animation-play-state: paused;
+              -webkit-animation-play-state: paused;
+            }
+
+            .mask {
+              width: 316px;
+              height: 316px;
+              border-radius: 50%;
+              top: 50%;
+              left: 50%;
+              transform: translate3d(-50%, -50%, 0);
+              position: absolute;
+              background-color: rgba(0, 0, 0, 0.3);
+
+              .time {
+                text-align: center;
+
+                .currentTime {
+                  padding-top: 42px;
+                  font-size: 34px;
+                  color: #e1be78;
+                }
+
+                .duration {
+                  color: #e1be78;
+                }
+              }
+
+              .circle {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate3d(-50%, -50%, 0);
+                width: 326px;
+                height: 326px;
+              }
+
+              .play_btn {
+                position: absolute;
+                width: 60px;
+                height: 60px;
+                background-color: #ad986d;
+                top: 50%;
+                left: 50%;
+                border-radius: 50%;
+                transform: translate3d(-50%, -50%, 0);
+                z-index: 2;
+                cursor: pointer;
+                text-align: center;
+                line-height: 60px;
+
+                .iconfont {
+                  font-size: 22px;
+                  color: #000;
+                }
+              }
+            }
+          }
+
+          .playing img {
+            animation-play-state: running;
+            -webkit-animation-play-state: running;
+          }
+
+          @keyframes spin {
+            0% {
+              transform: rotate(0deg);
+            }
+
+            100% {
+              transform: rotate(360deg);
+            }
+          }
+        }
+
+        .show_comment {
+          margin-top: calc(72px - 100vh);
+        }
+
+        .comment {
+          width: 100%;
+          height: 100%;
+          overflow: auto;
+          display: flex;
+          justify-content: center;
+
+          &::-webkit-scrollbar {
+            display: none;
+          }
+
+          .list {
+            width: 700px;
+            padding: 100px 0;
+            height: fit-content;
+
+            .item {
+              width: 100%;
+              display: flex;
+              margin: 20px 0;
+
+              .item_left {
+                width: 40px;
+
+                img {
+                  width: 100%;
+                  height: 40px;
+                  display: block;
+                  border-radius: 50%;
+                }
+              }
+
+              .item_right {
+                flex: 1;
+                padding-left: 10px;
+
+                .content {
+                  font-size: 16px;
+                  margin-bottom: 5px;
+
+                  .nickname {
+                    color: lightcoral;
+                    cursor: pointer;
+                  }
+                }
+
+                .bottom {
+                  display: flex;
+                  justify-content: space-between;
+
+                  .time {
+                    color: #ccc;
+                  }
+
+                  .like {
+                    display: flex;
+                    align-items: center;
+
+                    .icon {
+                      width: 15px;
+                      height: 15px;
+                      margin-right: 5px;
+                      text-align: center;
+                      line-height: 15px;
+                      cursor: pointer;
+                    }
+
+                    .likecount {
+                      color: #ddd;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .right {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+        .lyrics_content {
+          width: 500px;
+          height: 700px;
+          margin: 0 200px;
+          mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) calc(100% - 2em), transparent);
+
+          ul {
+            transition: all .3s;
+            mask-image: linear-gradient(to top, rgba(0, 0, 0, 1) calc(100% - 2em), transparent);
+
+            li {
+              font-size: 22px;
+              line-height: 45px;
+
+              &.active {
+                color: #c378e1;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.show_lyrics_box {
+  top: 0;
+}

@@ -1,0 +1,38 @@
+.list {
+  padding: 2px 0;
+  width: 1000px;
+  height: 100%;
+  margin: 0 auto;
+
+  .ant-table {
+    background: rgba($color: #000, $alpha: 0.3);
+    color: #fff;
+    border-radius: 5px;
+
+    .ant-table-header th {
+      color: #fff;
+      background: rgba($color: #000, $alpha: 0.3);
+      border: 0;
+    }
+
+    .ant-table-cell-scrollbar {
+      box-shadow: unset;
+    }
+
+    td {
+      border: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .ant-table-body {
+      height: calc(100vh - 196px);
+      scroll-behavior: smooth;
+    }
+
+    .ant-table-tbody>tr.ant-table-row:hover>td {
+      background: rgba($color: #000, $alpha: 0.5);
+    }
+  }
+}
