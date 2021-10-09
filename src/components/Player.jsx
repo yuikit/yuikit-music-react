@@ -188,6 +188,7 @@ export default class Player extends PureComponent {
     function inTurn() {
       return index === playList.length - 1
         ? (
+          // eslint-disable-next-line
           _this.refs.audio.pause(),
           _this.changePlay()
         )

@@ -1,9 +1,9 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import '../assets/scss/lyrics.scss'
 import { getLyric, getComment } from '../request/api'
 import { dateFormat, timeFormat } from '../utils'
 
-export default class Lyrics extends PureComponent {
+export default class Lyrics extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -16,16 +16,23 @@ export default class Lyrics extends PureComponent {
       progress: '0 999',
       currentHeight: 0,
       timer: 0,
-      isPlay: false
+      isPlay: false,
+      beginTime: 0,
     }
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    JSON.stringify(nextProps.playInfo) !== JSON.stringify(this.props.playInfo) && this.setState({
-      currentIndex: -1,
-      currentHeight: 0,
-    });
+  shouldComponentUpdate(nextProps) {
+    if (JSON.stringify(nextProps?.currentSongDetail) !== JSON.stringify(this.props?.currentSongDetail)) {
+      this.setState({
+        currentIndex: -1,
+        currentHeight: 0
+      });
+    }
+    return true;
+  }
+  
 
+  UNSAFE_componentWillReceiveProps(nextProps) {
     nextProps.currentSongDetail?.id && nextProps.currentSongDetail?.id !== this.props.currentSongDetail?.id && getLyric(nextProps.currentSongDetail.id).then(res => {
       if (res.code === 200) {
         const lyricInfo = res.lrc.lyric;
@@ -45,10 +52,10 @@ export default class Lyrics extends PureComponent {
     });
 
     this.props.playInfo?.currentTime && this.setProgress();
-    console.log('nextProps.playInfo?.isPlay', nextProps.playInfo?.isPlay);
-    nextProps.playInfo?.isPlay === false && this.setState({isPlay: false}, () => {
-      this.setCurrentIndex();
-    });
+    if(nextProps.playInfo?.isPlay === false) {
+      this.setState({isPlay: false});
+      clearInterval(this.state.timer);
+    }
   }
 
   firstScreenScroll = e => {
@@ -76,6 +83,10 @@ export default class Lyrics extends PureComponent {
     const timeDisplay = ~~timeFormat(currentTime, 0);
     this.setState({ progress: `${timeDisplay * step} ${circumference}` });
     if(this.state.isPlay !== isPlay) {
+      const { currentIndex } = this.state;
+      currentIndex !== -1 && this.setState({
+        currentIndex: currentIndex - 1
+      });
       this.setCurrentIndex();
       this.setState({isPlay});
     }
@@ -83,17 +94,18 @@ export default class Lyrics extends PureComponent {
 
   // 设置当前歌词index
   setCurrentIndex() {
+    console.log('设置index');
     const { isPlay } = this.props.playInfo;
-    console.log('setCurrentIndex isPlay', isPlay);
     const { timer: localTimer, time } = this.state;
-    const beginTime = +new Date();
+    const beginTime = this.state.beginTime || +new Date();
+    this.setState({beginTime});
     if (isPlay) {
       const timer = setInterval(() => {
-        const { currentIndex } = this.state;
-        let { currentHeight } = this.state;
+        let { currentIndex, currentHeight } = this.state;
         time.map((item, index) => {
-          return +new Date() - beginTime >= this.timeFormat(item) && index === currentIndex + 1 && this.setState({ currentIndex: index, currentHeight: currentHeight + document.querySelector('.active')?.offsetHeight || 0 });
+          return +new Date() - beginTime >= this.timeFormat(item) && (currentIndex = index);
         });
+        currentIndex !== this.state.currentIndex && this.setState({ currentIndex, currentHeight: currentHeight + document.querySelector('.active')?.offsetHeight || 0 });
         currentIndex === time.length - 1 && clearInterval(timer);
       }, 0);
       return this.setState({timer});
