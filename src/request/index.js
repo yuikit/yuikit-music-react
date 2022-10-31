@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const instance = axios.create({
   // baseURL: 'http://localhost:5000',
-  baseURL: 'http://music.eleuu.com',
+  baseURL: 'https://autumnfish.cn',
   timeout: 5000
 });
 
